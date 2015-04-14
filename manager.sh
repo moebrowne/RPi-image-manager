@@ -3,6 +3,7 @@
 declare -A Images
 
 Images['Raspbian']="http://downloads.raspberrypi.org/raspbian_latest"
+Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
@@ -34,4 +35,6 @@ if [ ! -f $IMAGE_FILE ]; then
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
 fi
+
+
 
