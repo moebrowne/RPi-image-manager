@@ -8,6 +8,7 @@ Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
+regexType="Content-Type: ([a-zA-Z0-9\/-]+)"
 
 #Determine which image to download
 IMAGE_NAME="$1"
@@ -24,6 +25,10 @@ IMAGE_ETAG="${BASH_REMATCH[1]}"
 #Get the image size
 [[ $IMAGE_HEADERS =~ $regexSize ]]
 IMAGE_SIZE="${BASH_REMATCH[1]}"
+
+#Get the image type
+[[ $IMAGE_HEADERS =~ $regexType ]]
+IMAGE_TYPE="${BASH_REMATCH[1]}"
 
 IMAGE_DIR="images/$IMAGE_NAME/$IMAGE_ETAG"
 IMAGE_FILE="$IMAGE_DIR/image.img.zip"
