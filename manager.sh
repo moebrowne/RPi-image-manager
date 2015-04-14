@@ -12,9 +12,10 @@ regexSize="Content-Length: ([0-9]+)"
 #Determine which image to download
 IMAGE_NAME="$1"
 IMAGE_URL="${Images[$IMAGE_NAME]}"
+IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
 
 #Get the HTTP headers for the image
-IMAGE_HEADERS=`curl -sIL "$IMAGE_URL"`
+IMAGE_HEADERS=`curl -sI "$IMAGE_URL"`
 
 #Get the ETag
 [[ $IMAGE_HEADERS =~ $regexETag ]]
