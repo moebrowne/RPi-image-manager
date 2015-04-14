@@ -1,0 +1,3 @@
+# Raspberry Pi Image Writer
+
+The aim of this tool is to make it easier to download and write the lastest version of an image to an SD card for a Raspberry Pi and also to give a more user-friendly output about how long things are likely to take etc...
