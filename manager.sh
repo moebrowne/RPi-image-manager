@@ -71,7 +71,7 @@ if [ ! -f "$IMAGE_FILE" ]; then
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
 else
-	echo "We have the latest version $IMAGE_NAME ($IMAGE_FILENAME)"
+	echo "We have the latest version of $IMAGE_NAME ($IMAGE_FILENAME)"
 fi
 
 #Get the images file type data
