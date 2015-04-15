@@ -13,6 +13,7 @@ Images['Snappy']="http://downloads.raspberrypi.org/ubuntu_latest"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
 Images['RaspBMC']="http://edge.samnazarko.co.uk/raspbmc/raspbmc-final-25032015.img.gz"
 Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
+Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
