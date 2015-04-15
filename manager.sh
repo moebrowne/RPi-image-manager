@@ -63,5 +63,14 @@ else
 	echo "We have the latest version $IMAGE_NAME ($IMAGE_FILENAME)"
 fi
 
+#Determine the right tool to decompress the archive with by matching the file extension
+case "$IMAGE_FILENAME" in
+  *.zip		)	IMAGE_DECOMP_WITH="unzip" ;;
+  *.tar.gz	)	IMAGE_DECOMP_WITH="tar -zxvf" ;;
+  *.gz		)	IMAGE_DECOMP_WITH="gzip -d" ;;
+  *.tar.bz2	)	IMAGE_DECOMP_WITH="tar -jxvf" ;;
+  *.bz2		)	IMAGE_DECOMP_WITH="bzip2 -dk" ;;
+  *			)	echo "UNKNOWN FILE TYPE '$IMAGE_FILENAME'"; exit
+esac
 
 
