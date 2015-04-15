@@ -94,4 +94,13 @@ if [[ $IMAGE_TYPE_DATA =~ "gzip compressed data" ]]; then
 	IMAGE_ARCHIVE_SIZE="${BASH_REMATCH[1]}"
 fi
 
+if [[ $IMAGE_TYPE_DATA =~ "boot sector" ]]; then
+
+	#Set the archive type
+	IMAGE_ARCHIVE_TYPE="NONE"
+
+	#Set the tool used to decompress this type of archive
+	IMAGE_ARCHIVE_TOOL="NONE"
+fi
+
 pv -WcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -WcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of=/dev/null 2> /dev/null # > "$IMAGE_DIR/image.img"
