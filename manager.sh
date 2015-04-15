@@ -50,6 +50,13 @@ IMAGE_TYPE="${BASH_REMATCH[1]}"
 [[ $IMAGE_HEADERS =~ $regexFileName ]]
 IMAGE_FILENAME="${BASH_REMATCH[1]}"
 
+#Check we could found a file name
+if [ "$IMAGE_FILENAME" = "" ]; then
+	#default to the requested name
+	#TODO: try and extract a filename from the URL
+	IMAGE_FILENAME="$IMAGE_NAME"
+fi
+
 #Set the image paths
 IMAGE_DIR="images/$IMAGE_NAME/$IMAGE_LASTMOD"
 IMAGE_FILE="$IMAGE_DIR/$IMAGE_FILENAME"
