@@ -63,14 +63,21 @@ else
 	echo "We have the latest version $IMAGE_NAME ($IMAGE_FILENAME)"
 fi
 
-#Determine the right tool to decompress the archive with by matching the file extension
-case "$IMAGE_FILENAME" in
-  *.zip		)	IMAGE_DECOMP_WITH="funzip" ;;
-  *.tar.gz	)	IMAGE_DECOMP_WITH="tar -zxfO" ;;
-  *.gz		)	IMAGE_DECOMP_WITH="gzip -dc" ;;
-  *.tar.bz2	)	IMAGE_DECOMP_WITH="tar -jxfO" ;;
-  *.bz2		)	IMAGE_DECOMP_WITH="bzip2 -dkc" ;;
-  *			)	echo "UNKNOWN FILE TYPE '$IMAGE_FILENAME'"; exit
-esac
+#Get the images file type data
+IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
 
-pv -cN "Extracting" "$IMAGE_FILE" | $IMAGE_DECOMP_WITH > "$IMAGE_DIR/image.img"
+if [[ $IMAGE_TYPE_DATA =~ "Zip archive data" ]]; then
+
+	#Set the archive type
+	IMAGE_ARCHIVE_TYPE="ZIP"
+
+	#Set the tool used to decompress this type of archive
+	IMAGE_ARCHIVE_TOOL="funzip"
+
+	#Determine the decompressed size of the archive
+	REGEX="([0-9]+)[ ]+"
+	[[ `unzip -l "$IMAGE_FILE"` =~ $REGEX ]]
+	IMAGE_ARCHIVE_SIZE="${BASH_REMATCH[1]}"
+fi
+
+pv -WcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -WcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of=/dev/null 2> /dev/null # > "$IMAGE_DIR/image.img"
