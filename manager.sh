@@ -80,4 +80,18 @@ if [[ $IMAGE_TYPE_DATA =~ "Zip archive data" ]]; then
 	IMAGE_ARCHIVE_SIZE="${BASH_REMATCH[1]}"
 fi
 
+if [[ $IMAGE_TYPE_DATA =~ "gzip compressed data" ]]; then
+
+	#Set the archive type
+	IMAGE_ARCHIVE_TYPE="GZIP"
+
+	#Set the tool used to decompress this type of archive
+	IMAGE_ARCHIVE_TOOL="zcat"
+
+	#Determine the decompressed size of the archive
+	REGEX="[ ]+[0-9]+[ ]+([0-9]+)"
+	[[ `zcat -l "$IMAGE_FILE"` =~ $REGEX ]]
+	IMAGE_ARCHIVE_SIZE="${BASH_REMATCH[1]}"
+fi
+
 pv -WcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -WcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of=/dev/null 2> /dev/null # > "$IMAGE_DIR/image.img"
