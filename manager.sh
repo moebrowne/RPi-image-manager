@@ -9,6 +9,7 @@ Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
 regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
 regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
+regexFileName="Content-Disposition: attachment; filename=([^\\s]+)"
 
 #Determine which image to download
 IMAGE_NAME="$1"
@@ -31,11 +32,16 @@ IMAGE_SIZE="${BASH_REMATCH[1]}"
 [[ $IMAGE_HEADERS =~ $regexType ]]
 IMAGE_TYPE="${BASH_REMATCH[1]}"
 
-IMAGE_DIR="images/$IMAGE_NAME/$IMAGE_ETAG"
-IMAGE_FILE="$IMAGE_DIR/image.img.zip"
+#Get the image name
+[[ $IMAGE_HEADERS =~ $regexFileName ]]
+IMAGE_FILENAME="${BASH_REMATCH[1]}"
+
+#Set the image paths
+IMAGE_DIR="images/$IMAGE_NAME/$IMAGE_LASTMOD"
+IMAGE_FILE="$IMAGE_DIR/$IMAGE_FILENAME"
 
 #Check if we already have this version
-if [ ! -f $IMAGE_FILE ]; then
+if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
 	mkdir -p "$IMAGE_DIR"
 	
