@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo "-----------------------------------------"
+echo "Raspberry Pi Image Manager (RIM)"
+echo ""
+echo "v0.1"
+echo "-----------------------------------------"
+
 declare -A Images
 
 Images['Raspbian']="http://downloads.raspberrypi.org/raspbian_latest"
