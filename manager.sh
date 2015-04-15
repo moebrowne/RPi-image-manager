@@ -8,7 +8,7 @@ Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
-regexType="Content-Type: ([a-zA-Z0-9\/-]+)"
+regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
 
 #Determine which image to download
 IMAGE_NAME="$1"
@@ -18,9 +18,10 @@ IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
 #Get the HTTP headers for the image
 IMAGE_HEADERS=`curl -sI "$IMAGE_URL"`
 
-#Get the ETag
-[[ $IMAGE_HEADERS =~ $regexETag ]]
-IMAGE_ETAG="${BASH_REMATCH[1]}"
+#Get the date this image was last modified
+[[ $IMAGE_HEADERS =~ $regexLastMod ]]
+IMAGE_LASTMOD="${BASH_REMATCH[1]}"
+IMAGE_LASTMOD=`date --date="$IMAGE_LASTMOD" +%s`
 
 #Get the image size
 [[ $IMAGE_HEADERS =~ $regexSize ]]
