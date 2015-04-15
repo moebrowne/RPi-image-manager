@@ -20,6 +20,10 @@ regexFileName="Content-Disposition: attachment; filename=([^\\s]+)"
 #Determine which image to download
 IMAGE_NAME="$1"
 IMAGE_URL="${Images[$IMAGE_NAME]}"
+
+echo "Determining if we have the latest version of $IMAGE_NAME"
+
+#Get the actual download URL of the image
 IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
 
 #Get the HTTP headers for the image
@@ -50,9 +54,13 @@ IMAGE_FILE="$IMAGE_DIR/$IMAGE_FILENAME"
 if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
 	mkdir -p "$IMAGE_DIR"
-	
+
+	echo "Downloading $IMAGE_NAME ($IMAGE_FILENAME)"
+
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
+else
+	echo "We have the latest version $IMAGE_NAME ($IMAGE_FILENAME)"
 fi
 
 
