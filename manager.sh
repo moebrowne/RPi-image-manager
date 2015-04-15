@@ -9,7 +9,10 @@ echo "-----------------------------------------"
 declare -A Images
 
 Images['Raspbian']="http://downloads.raspberrypi.org/raspbian_latest"
+Images['Snappy']="http://downloads.raspberrypi.org/ubuntu_latest"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
+Images['RaspBMC']="http://edge.samnazarko.co.uk/raspbmc/raspbmc-final-25032015.img.gz"
+Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
