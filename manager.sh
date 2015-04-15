@@ -15,7 +15,7 @@ Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-5.0.8.img.gz"
 regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
 regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
-regexFileName="Content-Disposition: attachment; filename=([^\\s]+)"
+regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 
 #Determine which image to download
 IMAGE_NAME="$1"
