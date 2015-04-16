@@ -12,3 +12,4 @@ The following images can be installed just by using their names:
 - OSMC
 - Pidora
 - RISC OS
+- Retro Pi (For RPi 1 & 2)
