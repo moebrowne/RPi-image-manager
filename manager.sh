@@ -46,7 +46,7 @@ if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
 	exit
 fi
 
-echo "Determining if we have the latest version of $IMAGE_NAME"
+echo "$IMAGE_NAME: Determining if we have the latest version"
 
 #Get the actual download URL of the image
 IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
@@ -87,12 +87,12 @@ if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
 	mkdir -p "$IMAGE_DIR"
 
-	echo "Downloading $IMAGE_NAME ($IMAGE_FILENAME)"
+	echo "$IMAGE_NAME: Downloading $IMAGE_FILENAME"
 
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
 else
-	echo "We have the latest version of $IMAGE_NAME ($IMAGE_FILENAME)"
+	echo "$IMAGE_NAME: We have the latest version of $IMAGE_FILENAME"
 fi
 
 #Get the images file type data
