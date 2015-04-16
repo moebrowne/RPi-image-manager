@@ -25,6 +25,27 @@ regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 IMAGE_NAME="$1"
 IMAGE_URL="${Images[$IMAGE_NAME]}"
 
+#Get the device to write the image to
+DEVICE_PATH="$2"
+
+#Check if the device specified is a block device
+if [ ! -b  "$DEVICE_PATH" ]; then
+	echo "$DEVICE_PATH: Not a block device"
+	exit
+fi
+
+#Check if the device is mounted
+if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
+	echo "$DEVICE_PATH: Unmounting all partitions"
+	umount "$DEVICE_PATH"*
+fi
+
+# Check if the device is still mounted
+if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
+	echo "$DEVICE_PATH: Still mounted"
+	exit
+fi
+
 echo "Determining if we have the latest version of $IMAGE_NAME"
 
 #Get the actual download URL of the image
@@ -114,4 +135,4 @@ if [[ $IMAGE_TYPE_DATA =~ "boot sector" ]]; then
 	IMAGE_ARCHIVE_TOOL="NONE"
 fi
 
-pv -WcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -WcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of=/dev/null 2> /dev/null # > "$IMAGE_DIR/image.img"
+pv -WcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -WcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH"
