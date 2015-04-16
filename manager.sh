@@ -1,9 +1,7 @@
 #!/bin/bash
 
 echo "-----------------------------------------"
-echo "Raspberry Pi Image Manager (RIM)"
-echo ""
-echo "v0.1"
+echo "  Raspberry Pi Image Manager (RIM) v0.2"
 echo "-----------------------------------------"
 
 declare -A Images
