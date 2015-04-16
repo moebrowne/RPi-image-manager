@@ -135,4 +135,4 @@ if [[ $IMAGE_TYPE_DATA =~ "boot sector" ]]; then
 	IMAGE_ARCHIVE_TOOL="NONE"
 fi
 
-pv -pabeWcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -pabeWcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH"
+pv -pabeWcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -pabeWcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
