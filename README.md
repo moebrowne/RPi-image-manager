@@ -1,6 +1,7 @@
 # Raspberry Pi Image Manager 
 
-The aim of this tool is to make it easier to download and write the latest version of an image to an SD card ready for use in a Raspberry Pi and also to give a more user-friendly and verbose output; for example how long things are likely to take etc...
+This tool makes it easier to download and write the latest version of an image to a device ready for use in a Raspberry Pi.
+It has the added benefit as it also gives users a verbose output showing for example how long the write will take.
 
 ## Usage
 
