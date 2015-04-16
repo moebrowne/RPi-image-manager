@@ -74,7 +74,6 @@ IMAGE_FILENAME="${BASH_REMATCH[1]}"
 #Check we could found a file name
 if [ "$IMAGE_FILENAME" = "" ]; then
 	#default to the requested name
-	#TODO: try and extract a filename from the URL
 	IMAGE_FILENAME="$IMAGE_NAME"
 fi
 
