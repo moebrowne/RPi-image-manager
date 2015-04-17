@@ -21,8 +21,16 @@ regexSize="Content-Length: ([0-9]+)"
 regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
 regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 
-#Determine which image to download
+# Define the image name
 IMAGE_NAME="$1"
+
+# Check a image name was specified
+if [ "$IMAGE_NAME" = "" ]; then
+	echo "Please specify an image name";
+	exit
+fi
+
+#Determine which image to download
 IMAGE_URL="${Images[$IMAGE_NAME]}"
 
 # Check we could find the requested image
