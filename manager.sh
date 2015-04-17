@@ -37,9 +37,6 @@ if [ $IMAGE_LIST = true ]; then
 	exit
 fi
 
-exit
-
-
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
