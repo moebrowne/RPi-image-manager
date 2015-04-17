@@ -20,6 +20,7 @@ regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
 regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
 regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
+regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
 
 # Define the image name
 IMAGE_NAME="$1"
@@ -67,6 +68,16 @@ IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
 
 #Get the HTTP headers for the image
 IMAGE_HEADERS=`curl -sI "$IMAGE_URL"`
+
+#Get the HTTP response code
+[[ $IMAGE_HEADERS =~ $regexHTTPCode ]]
+IMAGE_RESPONSE_CODE="${BASH_REMATCH[1]}"
+IMAGE_RESPONSE_MSG="${BASH_REMATCH[2]}"
+
+if [ "$IMAGE_RESPONSE_CODE" != 200 ]; then
+	echo "$IMAGE_NAME: Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
+	exit
+fi
 
 #Get the date this image was last modified
 [[ $IMAGE_HEADERS =~ $regexLastMod ]]
