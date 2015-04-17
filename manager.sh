@@ -65,6 +65,12 @@ fi
 #Get the device to write the image to
 DEVICE_PATH="$2"
 
+# Check a device was specified
+if [ "$DEVICE_PATH" = "" ]; then
+	echo "Please specify an device to write to";
+	exit
+fi
+
 #Check if the device specified is a block device
 if [ ! -b  "$DEVICE_PATH" ]; then
 	echo "$DEVICE_PATH: Not a block device"
