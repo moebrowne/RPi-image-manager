@@ -11,6 +11,12 @@ This tool takes 2 parameters like so:
 
 Where `{IMAGE_NAME}` is one of the images listed below and `{DEVICE_PATH}` is the path to the block device you wish to write the image to
 
+## Parameters
+
+There is a single parameter the tool can take:
+
+    -l or --list-images		List out all the images
+
 ## Supported Images
 
 The following images can be installed just by using their names:
