@@ -12,6 +12,7 @@ for i in "$@"
 do
 case $i in
         -l|--list-images)	IMAGE_LIST=true ;;
+        -*)					echo "UNKNOWN PARAMETER ${i#*=}"; exit ;;
 esac
 done
 
