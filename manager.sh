@@ -25,6 +25,12 @@ regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 IMAGE_NAME="$1"
 IMAGE_URL="${Images[$IMAGE_NAME]}"
 
+# Check we could find the requested image
+if [ -z ${Images[$IMAGE_NAME]+x} ]; then
+	echo "Could not find an image with the name '$IMAGE_NAME'";
+	exit
+fi
+
 #Get the device to write the image to
 DEVICE_PATH="$2"
 
