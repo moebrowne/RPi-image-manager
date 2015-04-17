@@ -4,6 +4,17 @@ echo "-----------------------------------------"
 echo "  Raspberry Pi Image Manager (RIM) v0.2"
 echo "-----------------------------------------"
 
+# Set default options
+IMAGE_LIST=false
+
+# Get any params defined
+for i in "$@"
+do
+case $i in
+        -l|--list-images)	IMAGE_LIST=true ;;
+esac
+done
+
 declare -A Images
 
 Images['Raspbian']="http://downloads.raspberrypi.org/raspbian_latest"
@@ -14,6 +25,19 @@ Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
 Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
 Images['RetroPi2']="http://downloads.petrockblock.com/images/retropie-v2.6.0-rpi2.img.gz"
 Images['RetroPi']="http://downloads.petrockblock.com/images/retropie-v2.6.0-rpi1.img.gz"
+
+# If the list flag has been raised, list the images
+if [ $IMAGE_LIST = true ]; then
+	echo "Images:"
+	for i in "${!Images[@]}"
+	do
+		echo "- $i"
+	done
+	exit
+fi
+
+exit
+
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
