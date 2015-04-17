@@ -119,6 +119,12 @@ else
 	echo "$IMAGE_NAME: We have the latest version of $IMAGE_FILENAME"
 fi
 
+# Check the file was created
+if [ ! -f "$IMAGE_FILE" ]; then
+	echo "$IMAGE_NAME: Something went wrong.. The image wasn't downloaded"
+	exit
+fi
+
 #Get the images file type data
 IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
 
