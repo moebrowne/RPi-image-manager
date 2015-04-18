@@ -67,7 +67,7 @@ DEVICE_PATH="$2"
 
 # Check a device was specified
 if [ "$DEVICE_PATH" = "" ]; then
-	echo "Please specify an device to write to";
+	echo "Please specify a device to write to";
 	exit
 fi
 
