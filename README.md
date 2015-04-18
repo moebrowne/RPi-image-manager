@@ -42,3 +42,13 @@ The following images can be installed just by using their names:
 - Pidora
 - RISC OS
 - Retro Pi (For RPi 1 & 2)
+
+## Dependencies
+
+There is only a single package required which is non-standard; pv. It's easily installed whatever Distro you're using:
+
+    # Ubuntu / Debian
+    apt-get install pv
+    
+    # RHEL / CentOS
+    yum install pv
