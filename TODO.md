@@ -10,3 +10,4 @@ Improvements:
 - Add a check to see if were running as root
 - Add a verbose/debug output
 - Extract the image URL list to a config file
+- Check the device has enough space to accommodate the image
