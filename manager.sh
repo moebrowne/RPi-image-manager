@@ -201,3 +201,6 @@ else
 	# The image is compressed, write it to the disk as we're decompressing it to save time
 	pv -pabeWcN "Extracting" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -pabeWcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 fi
+
+# Persist any buffers
+sync
