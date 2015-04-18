@@ -204,3 +204,6 @@ fi
 
 # Persist any buffers
 sync
+
+# Give a complete notice
+echo "$IMAGE_NAME: Image write complete!"
