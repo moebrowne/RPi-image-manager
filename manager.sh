@@ -89,7 +89,7 @@ if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
 	exit
 fi
 
-echo "$IMAGE_NAME: Determining if we have the latest version"
+echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Determining if we have the latest version"
 
 #Get the actual download URL of the image
 IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
@@ -103,7 +103,7 @@ IMAGE_RESPONSE_CODE="${BASH_REMATCH[1]}"
 IMAGE_RESPONSE_MSG="${BASH_REMATCH[2]}"
 
 if [ "$IMAGE_RESPONSE_CODE" != 200 ]; then
-	echo "$IMAGE_NAME: Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
 	exit
 fi
 
@@ -139,17 +139,17 @@ if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
 	mkdir -p "$IMAGE_DIR"
 
-	echo "$IMAGE_NAME: Downloading $IMAGE_FILENAME"
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Downloading $IMAGE_FILENAME"
 
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
 else
-	echo "$IMAGE_NAME: We have the latest version of $IMAGE_FILENAME"
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST We have the latest version of $IMAGE_FILENAME"
 fi
 
 # Check the file was created
 if [ ! -f "$IMAGE_FILE" ]; then
-	echo "$IMAGE_NAME: Something went wrong.. The image wasn't downloaded"
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Something went wrong.. The image wasn't downloaded"
 	exit
 fi
 
@@ -206,4 +206,4 @@ fi
 sync
 
 # Give a complete notice
-echo "$IMAGE_NAME: Image write complete!"
+echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Image write complete!"
