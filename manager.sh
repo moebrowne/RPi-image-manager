@@ -42,7 +42,7 @@ if [ $IMAGE_LIST = true ]; then
 	echo "Images:"
 	for i in "${!Images[@]}"
 	do
-		echo "- $i"
+		echo -e "- $COLOUR_PUR$i$COLOUR_RST"
 	done
 	exit
 fi
