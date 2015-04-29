@@ -215,6 +215,10 @@ if [ "$IMAGE_ARCHIVE_TYPE" = "NONE" ]; then
 	pv -pabeWcN "Writing" "$IMAGE_FILE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 else
 	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST The image is compressed"
+
+	# Check if the command to extract the image is avaliable
+	command_exists_exit "$IMAGE_ARCHIVE_TOOL"
+
 	# The image is compressed, write it to the disk as we're decompressing it to save time
 	pv -pabeWcN "Extracting $IMAGE_ARCHIVE_TYPE" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -pabeWcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 fi
