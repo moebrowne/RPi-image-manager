@@ -68,7 +68,7 @@ IMAGE_URL="${Images[$IMAGE_NAME]}"
 
 # Check we could find the requested image
 if [ "$IMAGE_URL" = "" ]; then
-	echo "Could not find an image with the name '$IMAGE_NAME'";
+	echo "Could not find an image with the name '$IMAGE_NAME'. Use the --list-images flag for a list.";
 	exit
 fi
 
