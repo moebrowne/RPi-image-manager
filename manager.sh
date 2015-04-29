@@ -203,6 +203,12 @@ if [[ $IMAGE_TYPE_DATA =~ "boot sector" ]]; then
 	IMAGE_ARCHIVE_TOOL="NONE"
 fi
 
+# Check if were able to determine what type of file the image is
+if [[ "$IMAGE_ARCHIVE_TYPE" = "" ]]; then
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Couldn't determine the file type of the image: '$IMAGE_TYPE_DATA'"
+	exit
+fi
+
 # Check if the image is compressed
 if [ "$IMAGE_ARCHIVE_TYPE" = "NONE" ]; then
 	# No compression, write straight to disk
