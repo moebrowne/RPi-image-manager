@@ -36,8 +36,8 @@ Images['OSMC']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp1_2015
 Images['OSMCPi2']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp2_20151027.img.gz"
 Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
 Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
-Images['RetroPi2']="http://downloads.petrockblock.com/images/retropie-v2.6.0-rpi2.img.gz"
-Images['RetroPi']="http://downloads.petrockblock.com/images/retropie-v2.6.0-rpi1.img.gz"
+Images['RetroPi2']="http://downloads.petrockblock.com/images/retropie-v3.2.1-rpi2.img.gz"
+Images['RetroPi']="http://downloads.petrockblock.com/images/retropie-v3.2.1-rpi1.img.gz"
 
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
