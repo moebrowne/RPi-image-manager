@@ -58,6 +58,12 @@ regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
 regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
 
+# Check the script is being run as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
 # Define the image name
 IMAGE_NAME="$1"
 
