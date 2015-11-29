@@ -12,6 +12,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 LIBRARY_PATH_ROOT="$DIR/utils"
 
 # Include the generic libraries
+. "$LIBRARY_PATH_ROOT/generic.sh"
 . "$LIBRARY_PATH_ROOT/colours.sh"
 
 # Set default options
