@@ -12,6 +12,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 LIBRARY_PATH_ROOT="$DIR/utils"
 
 # Include the generic libraries
+. "$LIBRARY_PATH_ROOT/generic.sh"
 . "$LIBRARY_PATH_ROOT/colours.sh"
 
 # Set default options
@@ -28,8 +29,10 @@ done
 
 declare -A Images
 
-Images['Raspbian']="http://downloads.raspberrypi.org/raspbian_latest"
-Images['Snappy']="http://downloads.raspberrypi.org/ubuntu_latest"
+Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
+Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-11-24/2015-11-21-raspbian-jessie.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2015-11-24/2015-11-21-raspbian-jessie-lite.zip"
+Images['Snappy']="https://downloads.raspberrypi.org/ubuntu_latest"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.0.img.gz"
 Images['OpenELECPi2']="http://releases.openelec.tv/OpenELEC-RPi2.arm-6.0.0.img.gz"
 Images['OSMC']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp1_20151027.img.gz"
@@ -55,6 +58,12 @@ regexSize="Content-Length: ([0-9]+)"
 regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
 regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
+
+# Check the script is being run as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
 
 # Define the image name
 IMAGE_NAME="$1"
