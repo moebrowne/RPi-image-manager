@@ -28,7 +28,9 @@ done
 
 declare -A Images
 
-Images['Raspbian']="http://downloads.raspberrypi.org/raspbian_latest"
+Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
+Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-11-24/2015-11-21-raspbian-jessie.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2015-11-24/2015-11-21-raspbian-jessie-lite.zip"
 Images['Snappy']="http://downloads.raspberrypi.org/ubuntu_latest"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.0.img.gz"
 Images['OpenELECPi2']="http://releases.openelec.tv/OpenELEC-RPi2.arm-6.0.0.img.gz"
