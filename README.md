@@ -27,9 +27,8 @@ Where `{IMAGE_NAME}` is one of the images listed below and `{DEVICE_PATH}` is th
 
 ## Parameters
 
-There is a single parameter the tool can take:
-
     -l or --list-images		List out all the images
+    --porcelain                 Optimise output so it can be fed into other programs
 
 ## Supported Images
 
@@ -52,3 +51,7 @@ There is only a single package required which is non-standard; pv. It's easily i
     
     # RHEL / CentOS
     yum install pv
+
+## Autocomplete
+
+If you want to allow autocompletion with the image names, add the contents of `autocomplete` to your `.bashrc` file

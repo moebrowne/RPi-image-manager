@@ -1,0 +1,14 @@
+# zsh support
+if [[ -n ${ZSH_VERSION-} ]]; then
+    autoload -U +X bashcompinit && bashcompinit
+fi
+
+# Autocompletion for image names
+_complete_images() {
+    local cur prev
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    COMPREPLY=( $(compgen -W "$(./manager.sh --list-images --porcelain)" -- $cur) )
+}
+complete -F _complete_images manager.sh

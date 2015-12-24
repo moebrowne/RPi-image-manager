@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "-----------------------------------------"
-echo " Raspberry Pi Image Manager (RIM) v0.3.2 "
-echo "-----------------------------------------"
-
 # Get the source directory
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
@@ -17,15 +13,23 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 
 # Set default options
 IMAGE_LIST=false
+PORCELAIN=false
 
 # Get any params defined
 for i in "$@"
 do
 case $i in
         -l|--list-images)	IMAGE_LIST=true ;;
+        --porcelain)    	PORCELAIN=true ;;
         -*)					echo "UNKNOWN PARAMETER ${i#*=}"; exit ;;
 esac
 done
+
+if [ $PORCELAIN = false ]; then
+    echo "-----------------------------------------"
+    echo " Raspberry Pi Image Manager (RIM) v0.3.2 "
+    echo "-----------------------------------------"
+fi
 
 declare -A Images
 
@@ -44,10 +48,16 @@ Images['RetroPi']="http://downloads.petrockblock.com/images/retropie-v3.2.1-rpi1
 
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
-	echo "Images:"
+        if [ $PORCELAIN = false ]; then
+            echo "Images:"
+        fi
 	for i in "${!Images[@]}"
 	do
-		echo -e "- $COLOUR_PUR$i$COLOUR_RST"
+                if [ $PORCELAIN = true ]; then
+                   echo -e "$i"
+                else
+                    echo -e "- $COLOUR_PUR$i$COLOUR_RST"
+                fi
 	done
 	exit
 fi
