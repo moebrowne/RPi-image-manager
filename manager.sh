@@ -47,7 +47,9 @@ Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.1
 
 declare -A ImagesSHA1
 
+ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
 ImagesSHA1['Raspbian-Jessie']="da329713833e0785ffd94796304b7348803381db"
+ImagesSHA1['Raspbian-Jessie-Lite']="bb7bcada44957109f1c3eb98548951d0ba53b9c4"
 
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
