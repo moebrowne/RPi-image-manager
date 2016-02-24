@@ -44,6 +44,11 @@ Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/
 Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi2.img.gz"
 Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.10.1-desktop-armhf-raspberry-pi-2.img.xz"
 
+
+declare -A ImagesSHA1
+
+ImagesSHA1['Raspbian-Jessie']="da329713833e0785ffd94796304b7348803381db"
+
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
 	echo "Images:"
