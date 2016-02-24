@@ -181,6 +181,25 @@ if [ ! -f "$IMAGE_FILE" ]; then
 	exit
 fi
 
+# Check if a SHA1 hash has been defined for this image
+IMAGE_HASH="${ImagesSHA1[$IMAGE_NAME]}"
+
+if [ "$IMAGE_HASH" != "" ]; then
+
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Checking image hash"
+
+	# Hash the downloaded image
+	IMAGE_HASH_ACTUAL=$(sha1sum "$IMAGE_FILE" |  grep -Eo "^([^ ]+)")
+
+	# Check the hashes match
+	if [ "$IMAGE_HASH" != "$IMAGE_HASH_ACTUAL" ]; then
+		echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Hash mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
+		exit 1;
+	else
+		echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Image hash OK [$IMAGE_HASH]"
+	fi
+fi
+
 #Get the images file type data
 IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
 
