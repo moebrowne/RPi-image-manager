@@ -30,10 +30,10 @@ done
 declare -A Images
 
 Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
-Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-11-24/2015-11-21-raspbian-jessie.zip"
-Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2015-11-24/2015-11-21-raspbian-jessie-lite.zip"
+Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-09/2016-02-09-raspbian-jessie.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-02-09/2016-02-09-raspbian-jessie-lite.zip"
 Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2015-11-12-jessie-minibian.tar.gz"
-Images['Snappy']="https://downloads.raspberrypi.org/ubuntu_latest"
+Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.1.img.gz"
 Images['OpenELECPi2']="http://releases.openelec.tv/OpenELEC-RPi2.arm-6.0.1.img.gz"
 Images['OSMC']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp1_20160130.img.gz"
@@ -42,6 +42,7 @@ Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
 Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
 Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi1.img.gz"
 Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi2.img.gz"
+Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.10.1-desktop-armhf-raspberry-pi-2.img.xz"
 
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
