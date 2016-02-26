@@ -30,10 +30,10 @@ done
 declare -A Images
 
 Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
-Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-11-24/2015-11-21-raspbian-jessie.zip"
-Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2015-11-24/2015-11-21-raspbian-jessie-lite.zip"
+Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-09/2016-02-09-raspbian-jessie.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-02-09/2016-02-09-raspbian-jessie-lite.zip"
 Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2015-11-12-jessie-minibian.tar.gz"
-Images['Snappy']="https://downloads.raspberrypi.org/ubuntu_latest"
+Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.1.img.gz"
 Images['OpenELECPi2']="http://releases.openelec.tv/OpenELEC-RPi2.arm-6.0.1.img.gz"
 Images['OSMC']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp1_20160130.img.gz"
@@ -42,6 +42,25 @@ Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
 Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
 Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi1.img.gz"
 Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi2.img.gz"
+Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.10.1-desktop-armhf-raspberry-pi-2.img.xz"
+
+
+declare -A ImagesSHA1
+
+ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
+ImagesSHA1['Raspbian-Jessie']="da329713833e0785ffd94796304b7348803381db"
+ImagesSHA1['Raspbian-Jessie-Lite']="bb7bcada44957109f1c3eb98548951d0ba53b9c4"
+ImagesSHA1['Minbian']="0ec01c74c5534101684c64346b393dc169ebd1af"
+ImagesSHA1['Snappy']="2d32d93e0086593fe34b8c07d4af7227c79addd3"
+ImagesSHA1['OpenELEC']="ba4cf226457ea580e623b66064bd3d5949ed5eaf"
+ImagesSHA1['OpenELECPi2']="90192cae3a7231f9c416da8cbbf1e03866c7dbad"
+ImagesSHA1['OSMC']="baa12cde9ad97601c2fc5a1e7c11a942806ec83a"
+ImagesSHA1['OSMCPi2']="5f70d2c9a7484f27b8ceb39ca8f6aa5ac6c1cfc4"
+ImagesSHA1['Pidora']="00f85ca01a6555d4b0843054090c222239898b7c"
+ImagesSHA1['RISCOS']="9c28ce57a23692cd70e90cfe9fa24e2014501a05"
+#ImagesSHA1['RetroPi']=""
+#ImagesSHA1['RetroPi2']=""
+ImagesSHA1['MATE']="9964890fc6be2ac35c2cef3efcfde0687dab43a4"
 
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
@@ -173,6 +192,25 @@ fi
 if [ ! -f "$IMAGE_FILE" ]; then
 	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Something went wrong.. The image wasn't downloaded"
 	exit
+fi
+
+# Check if a SHA1 hash has been defined for this image
+IMAGE_HASH="${ImagesSHA1[$IMAGE_NAME]}"
+
+if [ "$IMAGE_HASH" != "" ]; then
+
+	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Checking image hash"
+
+	# Hash the downloaded image
+	IMAGE_HASH_ACTUAL=$(sha1sum "$IMAGE_FILE" |  grep -Eo "^([^ ]+)")
+
+	# Check the hashes match
+	if [ "$IMAGE_HASH" != "$IMAGE_HASH_ACTUAL" ]; then
+		echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Hash mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
+		exit 1;
+	else
+		echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Image hash OK [$IMAGE_HASH]"
+	fi
 fi
 
 #Get the images file type data
