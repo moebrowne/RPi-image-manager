@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "-----------------------------------------"
-echo " Raspberry Pi Image Manager (RIM) v0.3.3 "
+echo " Raspberry Pi Image Manager (RIM) v0.3.4 "
 echo "-----------------------------------------"
 
 # Get the source directory
