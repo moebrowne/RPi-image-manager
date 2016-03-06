@@ -30,7 +30,7 @@ done
 declare -A Images
 
 Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
-Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-09/2016-02-09-raspbian-jessie.zip"
+Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-29/2016-02-26-raspbian-jessie.zip"
 Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-02-09/2016-02-09-raspbian-jessie-lite.zip"
 Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2015-11-12-jessie-minibian.tar.gz"
 Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
@@ -48,7 +48,7 @@ Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.1
 declare -A ImagesSHA1
 
 ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
-ImagesSHA1['Raspbian-Jessie']="da329713833e0785ffd94796304b7348803381db"
+ImagesSHA1['Raspbian-Jessie']="4a841dffd02197548bf2329b90a0a44eeeebb4ab"
 ImagesSHA1['Raspbian-Jessie-Lite']="bb7bcada44957109f1c3eb98548951d0ba53b9c4"
 ImagesSHA1['Minbian']="0ec01c74c5534101684c64346b393dc169ebd1af"
 ImagesSHA1['Snappy']="2d32d93e0086593fe34b8c07d4af7227c79addd3"
