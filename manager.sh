@@ -31,7 +31,7 @@ declare -A Images
 
 Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
 Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-29/2016-02-26-raspbian-jessie.zip"
-Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-02-09/2016-02-09-raspbian-jessie-lite.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-02-29/2016-02-26-raspbian-jessie-lite.zip"
 Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2015-11-12-jessie-minibian.tar.gz"
 Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.1.img.gz"
@@ -40,8 +40,8 @@ Images['OSMC']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp1_2016
 Images['OSMCPi2']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp2_20160130.img.gz"
 Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
 Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
-Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi1.img.gz"
-Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.4/retropie-v3.4-rpi2.img.gz"
+Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.6/retropie-v3.6-rpi1_zero.img.gz"
+Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.6/retropie-v3.6-rpi2_rpi3.img.gz"
 Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.10.1-desktop-armhf-raspberry-pi-2.img.xz"
 
 
@@ -49,7 +49,7 @@ declare -A ImagesSHA1
 
 ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
 ImagesSHA1['Raspbian-Jessie']="4a841dffd02197548bf2329b90a0a44eeeebb4ab"
-ImagesSHA1['Raspbian-Jessie-Lite']="bb7bcada44957109f1c3eb98548951d0ba53b9c4"
+ImagesSHA1['Raspbian-Jessie-Lite']="0d58e68d62cb3e55bdc73860a6be2281783b8c0f"
 ImagesSHA1['Minbian']="0ec01c74c5534101684c64346b393dc169ebd1af"
 ImagesSHA1['Snappy']="2d32d93e0086593fe34b8c07d4af7227c79addd3"
 ImagesSHA1['OpenELEC']="ba4cf226457ea580e623b66064bd3d5949ed5eaf"
