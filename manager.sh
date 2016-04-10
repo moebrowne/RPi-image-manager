@@ -30,9 +30,9 @@ done
 declare -A Images
 
 Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
-Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-02-29/2016-02-26-raspbian-jessie.zip"
-Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-02-29/2016-02-26-raspbian-jessie-lite.zip"
-Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2015-11-12-jessie-minibian.tar.gz"
+Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-03-18/2016-03-18-raspbian-jessie.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-03-18/2016-03-18-raspbian-jessie-lite.zip"
+Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2016-03-12-jessie-minibian.tar.gz"
 Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.1.img.gz"
 Images['OpenELECPi2']="http://releases.openelec.tv/OpenELEC-RPi2.arm-6.0.1.img.gz"
@@ -48,9 +48,9 @@ Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.1
 declare -A ImagesSHA1
 
 ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
-ImagesSHA1['Raspbian-Jessie']="4a841dffd02197548bf2329b90a0a44eeeebb4ab"
-ImagesSHA1['Raspbian-Jessie-Lite']="0d58e68d62cb3e55bdc73860a6be2281783b8c0f"
-ImagesSHA1['Minbian']="0ec01c74c5534101684c64346b393dc169ebd1af"
+ImagesSHA1['Raspbian-Jessie']="db41f2a8c6236c0ca9150fe4db2017c09e7871fb"
+ImagesSHA1['Raspbian-Jessie-Lite']="b78bb50bdac5ec8c108f34104f788e214ac23635"
+ImagesSHA1['Minbian']="43558a173420108408bb8c1c6731ed5812c06971"
 ImagesSHA1['Snappy']="2d32d93e0086593fe34b8c07d4af7227c79addd3"
 ImagesSHA1['OpenELEC']="ba4cf226457ea580e623b66064bd3d5949ed5eaf"
 ImagesSHA1['OpenELECPi2']="90192cae3a7231f9c416da8cbbf1e03866c7dbad"
