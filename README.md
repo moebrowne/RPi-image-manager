@@ -32,13 +32,17 @@ There is a single parameter the tool can take:
 
 The following images can be installed just by using their names:
 
-- Raspbian
-- Ubuntu Snappy
-- OPENELEC
-- OSMC
+- Raspbian (Wheezy & Jessie)
+- Minbian
+- Ubuntu Snappy (RPi 2 only)
+- OpenELEC (RPi 1 & 2)
+- LibreELEC (RPi 1 & 2)
+- OSMC (RPi 1 & 2)
 - Pidora
 - RISC OS
-- Retro Pi (For RPi 1 & 2)
+- Retro Pi (RPi 1 & 2)
+- MATE (RPi 2 only)
+- Weather Station
 
 ## Dependencies
 
