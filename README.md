@@ -5,16 +5,13 @@ It has the added benefit as it also gives users a verbose output showing for exa
 
 ## Install
 
-Instillation is easy:
+Installation is easy:
 
     # Clone this repo
     git clone https://github.com/moebrowne/RPi-Image-Manager
     
     # Change directory
     cd RPi-Image-Manager
-    
-    # Set the image manager as executable
-    chmod u+x manager.sh
 
 ## Usage
 
