@@ -43,6 +43,7 @@ Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/risc
 Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.6/retropie-v3.6-rpi1_zero.img.gz"
 Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.6/retropie-v3.6-rpi2_rpi3.img.gz"
 Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.10.1-desktop-armhf-raspberry-pi-2.img.xz"
+Images['Weather-Station']="https://downloads.raspberrypi.org/weather_station/images/weather_station-2016-03-24/WeatherStation.zip"
 
 
 declare -A ImagesSHA1
@@ -61,6 +62,7 @@ ImagesSHA1['RISCOS']="9c28ce57a23692cd70e90cfe9fa24e2014501a05"
 #ImagesSHA1['RetroPi']=""
 #ImagesSHA1['RetroPi2']=""
 ImagesSHA1['MATE']="9964890fc6be2ac35c2cef3efcfde0687dab43a4"
+ImagesSHA1['Weather-Station']="9eed5f9f5366faa1f2757c0e7ca81107a81ce249"
 
 # If the list flag has been raised, list the images
 if [ $IMAGE_LIST = true ]; then
