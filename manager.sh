@@ -31,7 +31,7 @@ declare -A Images
 
 Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
 Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-05-31/2016-05-27-raspbian-jessie.zip"
-Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-03-18/2016-03-18-raspbian-jessie-lite.zip"
+Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-05-31/2016-05-27-raspbian-jessie-lite.zip"
 Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2016-03-12-jessie-minibian.tar.gz"
 Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
 Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.1.img.gz"
@@ -49,7 +49,7 @@ declare -A ImagesSHA1
 
 ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
 ImagesSHA1['Raspbian-Jessie']="64c7ed611929ea5178fbb69b5a5f29cc9cc7c157"
-ImagesSHA1['Raspbian-Jessie-Lite']="b78bb50bdac5ec8c108f34104f788e214ac23635"
+ImagesSHA1['Raspbian-Jessie-Lite']="03b6ea33efc3bb4d475f528421d554fc1ef91944"
 ImagesSHA1['Minbian']="43558a173420108408bb8c1c6731ed5812c06971"
 ImagesSHA1['Snappy']="2d32d93e0086593fe34b8c07d4af7227c79addd3"
 ImagesSHA1['OpenELEC']="ba4cf226457ea580e623b66064bd3d5949ed5eaf"
