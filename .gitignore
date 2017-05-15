@@ -3,4 +3,4 @@
 *~
 
 #Images this tool downloads
-images/*
+images/*/cache
