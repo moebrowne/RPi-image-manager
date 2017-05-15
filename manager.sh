@@ -147,13 +147,13 @@ if [ "$IMAGE_FILENAME" = "" ]; then
 fi
 
 #Set the image paths
-IMAGE_DIR="images/$IMAGE_NAME/$IMAGE_LASTMOD"
-IMAGE_FILE="$IMAGE_DIR/$IMAGE_FILENAME"
+IMAGE_CACHE_DIR="$selectedPath/cache"
+IMAGE_FILE="$IMAGE_CACHE_DIR/$IMAGE_FILENAME"
 
 #Check if we already have this version
 if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
-	mkdir -p "$IMAGE_DIR"
+	mkdir -p "$IMAGE_CACHE_DIR"
 
 	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Downloading $IMAGE_FILENAME"
 
