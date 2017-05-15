@@ -48,8 +48,6 @@ while read -r distroVersionName; do
     distroVersions+=("$distroVersionName")
 done < <(ls -1d images/"$distroSelected"/*/)
 
-echo "${distroVersions[@]}"
-
 select opt in "${distroVersions[@]}"; do
     distroVersionSelected="${distroVersions[$(($REPLY-1))]}"
 
