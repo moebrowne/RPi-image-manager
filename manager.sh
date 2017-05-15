@@ -40,6 +40,26 @@ select opt in "${distros[@]}"; do
     fi
 done
 
+echo "Select $distroSelected version:"
+
+while read -r distroVersionName; do
+    distroVersionName="${distroVersionName/images\/$distroSelected/}"
+    distroVersionName="${distroVersionName///}"
+    distroVersions+=("$distroVersionName")
+done < <(ls -1d images/"$distroSelected"/*/)
+
+echo "${distroVersions[@]}"
+
+select opt in "${distroVersions[@]}"; do
+    distroVersionSelected="${distroVersions[$REPLY]}"
+
+    if [[ "$distroVersionSelected" = "" ]]; then
+        echo "Invalid selection"
+    else
+        break
+    fi
+done
+
 # Check the script is being run as root
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root"
