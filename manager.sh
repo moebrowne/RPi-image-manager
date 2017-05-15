@@ -106,7 +106,7 @@ if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
 	exit
 fi
 
-echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Determining if we have the latest version"
+echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Determining if we have the latest version"
 
 #Get the actual download URL of the image
 IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
@@ -120,7 +120,7 @@ IMAGE_RESPONSE_CODE="${BASH_REMATCH[1]}"
 IMAGE_RESPONSE_MSG="${BASH_REMATCH[2]}"
 
 if [ "$IMAGE_RESPONSE_CODE" != 200 ]; then
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
 	exit
 fi
 
@@ -156,17 +156,17 @@ if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
 	mkdir -p "$IMAGE_CACHE_DIR"
 
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Downloading $IMAGE_FILENAME"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Downloading $IMAGE_FILENAME"
 
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
 else
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST We have the latest version of $IMAGE_FILENAME"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST We have the latest version of $IMAGE_FILENAME"
 fi
 
 # Check the file was created
 if [ ! -f "$IMAGE_FILE" ]; then
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Something went wrong.. The image wasn't downloaded"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Something went wrong.. The image wasn't downloaded"
 	exit
 fi
 
@@ -175,17 +175,17 @@ IMAGE_HASH="$(<"$selectedPath/hash")"
 
 if [ "$IMAGE_HASH" != "" ]; then
 
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Checking image hash"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Checking image hash"
 
 	# Hash the downloaded image
 	IMAGE_HASH_ACTUAL=$(sha1sum "$IMAGE_FILE" |  grep -Eo "^([^ ]+)")
 
 	# Check the hashes match
 	if [ "$IMAGE_HASH" != "$IMAGE_HASH_ACTUAL" ]; then
-		echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Hash mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
+		echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Hash mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
 		exit 1;
 	else
-		echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Image hash OK [$IMAGE_HASH]"
+		echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Image hash OK [$IMAGE_HASH]"
 	fi
 fi
 
@@ -231,7 +231,7 @@ fi
 
 # Check if were able to determine what type of file the image is
 if [[ "$IMAGE_ARCHIVE_TYPE" = "" ]]; then
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Couldn't determine the file type of the image: '$IMAGE_TYPE_DATA'"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Couldn't determine the file type of the image: '$IMAGE_TYPE_DATA'"
 	exit
 fi
 
@@ -240,7 +240,7 @@ if [ "$IMAGE_ARCHIVE_TYPE" = "NONE" ]; then
 	# No compression, write straight to disk
 	pv -pabeWcN "Writing" "$IMAGE_FILE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 else
-	echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST The image is compressed"
+	echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST The image is compressed"
 
 	# Check if the command to extract the image is avaliable
 	command_exists_exit "$IMAGE_ARCHIVE_TOOL"
@@ -253,4 +253,4 @@ fi
 sync
 
 # Give a complete notice
-echo -e "$COLOUR_PUR$IMAGE_NAME:$COLOUR_RST Image write complete!"
+echo -e "$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST Image write complete!"
