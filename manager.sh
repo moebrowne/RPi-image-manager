@@ -141,10 +141,10 @@ IMAGE_TYPE="${BASH_REMATCH[1]}"
 [[ $IMAGE_HEADERS =~ $regexFileName ]]
 IMAGE_FILENAME="${BASH_REMATCH[1]}"
 
-#Check we could found a file name
+# Check we could determine the image file name
 if [ "$IMAGE_FILENAME" = "" ]; then
-	#default to the requested name
-	IMAGE_FILENAME="$IMAGE_NAME"
+	# Default to a generic  name
+	IMAGE_FILENAME="image"
 fi
 
 #Set the image paths
