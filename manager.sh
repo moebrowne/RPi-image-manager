@@ -31,7 +31,7 @@ done < <(ls -1d images/*/)
 echo "Select distro: "
 
 select opt in "${distros[@]}"; do
-    distroSelected="${distros[$REPLY]}"
+    distroSelected="${distros[$(($REPLY-1))]}"
 
     if [[ "$distroSelected" = "" ]]; then
         echo "Invalid selection"
@@ -51,7 +51,7 @@ done < <(ls -1d images/"$distroSelected"/*/)
 echo "${distroVersions[@]}"
 
 select opt in "${distroVersions[@]}"; do
-    distroVersionSelected="${distroVersions[$REPLY]}"
+    distroVersionSelected="${distroVersions[$(($REPLY-1))]}"
 
     if [[ "$distroVersionSelected" = "" ]]; then
         echo "Invalid selection"
