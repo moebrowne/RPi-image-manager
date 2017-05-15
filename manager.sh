@@ -91,6 +91,7 @@ while read -ep "Path: " devicePath; do
     fi
 
     DEVICE_PATH="$devicePath"
+    break
 done
 
 #Check if the device is mounted
