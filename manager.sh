@@ -170,7 +170,7 @@ if [ ! -f "$IMAGE_FILE" ]; then
 fi
 
 # Check if a SHA1 hash has been defined for this image
-IMAGE_HASH="${ImagesSHA1[$IMAGE_NAME]}"
+IMAGE_HASH="$(<"$selectedPath/hash")"
 
 if [ "$IMAGE_HASH" != "" ]; then
 
