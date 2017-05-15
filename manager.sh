@@ -74,20 +74,24 @@ if [ "$IMAGE_URL" = "" ]; then
 	exit
 fi
 
-#Get the device to write the image to
-DEVICE_PATH="$2"
+# Get the device to write the image to
+echo "Where do you want to write the image?"
 
-# Check a device was specified
-if [ "$DEVICE_PATH" = "" ]; then
-	echo "Please specify a device to write to";
-	exit
-fi
+while read -ep "Path: " devicePath; do
+    # Check a device was specified
+    if [ "$devicePath" = "" ]; then
+        echo "Please specify a device path to write to";
+        continue
+    fi
 
-#Check if the device specified is a block device
-if [ ! -b  "$DEVICE_PATH" ]; then
-	echo "$DEVICE_PATH: Not a block device"
-	exit
-fi
+    # Check if the device specified is a block device
+    if [ ! -b  "$devicePath" ]; then
+        echo "The specified path is not a block device"
+        continue
+    fi
+
+    DEVICE_PATH="$devicePath"
+done
 
 #Check if the device is mounted
 if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
