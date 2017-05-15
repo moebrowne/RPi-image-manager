@@ -108,7 +108,7 @@ fi
 
 CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
 
-echo -e "$CLI_PREFIX Determining if we have the latest version"
+echo -en "$CLI_PREFIX Fetching meta data..."
 
 #Get the actual download URL of the image
 IMAGE_URL=`curl -sIL "$IMAGE_URL" -o /dev/null -w %{url_effective}`
@@ -122,22 +122,16 @@ IMAGE_RESPONSE_CODE="${BASH_REMATCH[1]}"
 IMAGE_RESPONSE_MSG="${BASH_REMATCH[2]}"
 
 if [ "$IMAGE_RESPONSE_CODE" != 200 ]; then
+    echo " FAIL"
 	echo -e "$CLI_PREFIX Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
 	exit
+else
+    echo " OK"
 fi
-
-#Get the date this image was last modified
-[[ $IMAGE_HEADERS =~ $regexLastMod ]]
-IMAGE_LASTMOD="${BASH_REMATCH[1]}"
-IMAGE_LASTMOD=`date --date="$IMAGE_LASTMOD" +%s`
 
 #Get the image size
 [[ $IMAGE_HEADERS =~ $regexSize ]]
 IMAGE_SIZE="${BASH_REMATCH[1]}"
-
-#Get the image type
-[[ $IMAGE_HEADERS =~ $regexType ]]
-IMAGE_TYPE="${BASH_REMATCH[1]}"
 
 #Get the image name
 [[ $IMAGE_HEADERS =~ $regexFileName ]]
@@ -158,12 +152,12 @@ if [ ! -f "$IMAGE_FILE" ]; then
 	#Make the directory to store the image
 	mkdir -p "$IMAGE_CACHE_DIR"
 
-	echo -e "$CLI_PREFIX Downloading $IMAGE_FILENAME"
+	echo -e "$CLI_PREFIX Downloading image..."
 
 	#Download the image
 	curl -sL "$IMAGE_URL" | pv -s "$IMAGE_SIZE" -cN "Download" >  "$IMAGE_FILE"
 else
-	echo -e "$CLI_PREFIX We have the latest version of $IMAGE_FILENAME"
+	echo -e "$CLI_PREFIX Using cache"
 fi
 
 # Check the file was created
@@ -177,17 +171,18 @@ IMAGE_HASH="$(<"$selectedPath/hash")"
 
 if [ "$IMAGE_HASH" != "" ]; then
 
-	echo -e "$CLI_PREFIX Checking image hash"
+	echo -en "$CLI_PREFIX Checking hash..."
 
 	# Hash the downloaded image
 	IMAGE_HASH_ACTUAL=$(sha1sum "$IMAGE_FILE" |  grep -Eo "^([^ ]+)")
 
 	# Check the hashes match
 	if [ "$IMAGE_HASH" != "$IMAGE_HASH_ACTUAL" ]; then
-		echo -e "$CLI_PREFIX Hash mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
-		exit 1;
+	    echo " FAIL"
+		echo  "$CLI_PREFIX Hashes mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
+		exit 1
 	else
-		echo -e "$CLI_PREFIX Image hash OK [$IMAGE_HASH]"
+		echo " OK"
 	fi
 fi
 
