@@ -54,6 +54,7 @@ select opt in "${distroVersions[@]}"; do
     if [[ "$distroVersionSelected" = "" ]]; then
         echo "Invalid selection"
     else
+        selectedPath="images/$distroSelected/$distroVersionSelected/"
         break
     fi
 done
@@ -64,25 +65,14 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Define the image name
-IMAGE_NAME="$1"
-
-# Check a image name was specified
-if [ "$IMAGE_NAME" = "" ]; then
-	echo "Please specify an image name";
-	exit
-fi
-
-#Determine which image to download
-IMAGE_URL="${Images[$IMAGE_NAME]}"
+# Get the path to download the image
+IMAGE_URL=$(<"$selectedPath/URL")
 
 # Check we could find the requested image
 if [ "$IMAGE_URL" = "" ]; then
-	echo "Could not find an image with the name '$IMAGE_NAME'. Use the --list-images flag for a list.";
+	echo "ERROR: Image download path empty?!";
 	exit
 fi
-
-echo "DEBUG" && exit  1
 
 #Get the device to write the image to
 DEVICE_PATH="$2"
