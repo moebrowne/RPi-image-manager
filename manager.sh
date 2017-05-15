@@ -15,75 +15,30 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 . "$LIBRARY_PATH_ROOT/generic.sh"
 . "$LIBRARY_PATH_ROOT/colours.sh"
 
-# Set default options
-IMAGE_LIST=false
-
-# Get any params defined
-for i in "$@"
-do
-case $i in
-        -l|--list-images)	IMAGE_LIST=true ;;
-        -*)					echo "UNKNOWN PARAMETER ${i#*=}"; exit ;;
-esac
-done
-
-declare -A Images
-
-Images['Raspbian-Whezzy']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip"
-Images['Raspbian-Jessie']="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-05-31/2016-05-27-raspbian-jessie.zip"
-Images['Raspbian-Jessie-Lite']="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2016-05-31/2016-05-27-raspbian-jessie-lite.zip"
-Images['Minbian']="http://downloads.sourceforge.net/project/minibian/2016-03-12-jessie-minibian.tar.gz"
-Images['Snappy']="http://cdimage.ubuntu.com/ubuntu-snappy/15.04/stable/latest/ubuntu-15.04-snappy-armhf-raspi2.img.xz"
-Images['OpenELEC']="http://releases.openelec.tv/OpenELEC-RPi.arm-6.0.3.img.gz"
-Images['OpenELECPi2']="http://releases.openelec.tv/OpenELEC-RPi2.arm-6.0.3.img.gz"
-Images['LibreELEC']="http://releases.libreelec.tv/LibreELEC-RPi.arm-7.0.2.img.gz"
-Images['LibreELECPi2']="http://releases.libreelec.tv/LibreELEC-RPi.arm-7.0.2.img.gz"
-Images['OSMC']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp1_20160621.img.gz"
-Images['OSMCPi2']="http://download.osmc.tv/installers/diskimages/OSMC_TGT_rbp2_20160621.img.gz"
-Images['Pidora']="http://pidora.ca/pidora/releases/20/images/Pidora-2014-R3.zip"
-Images['RISCOS']="https://www.riscosopen.org/zipfiles/platform/raspberry-pi/riscos-2015-02-17.14.zip"
-Images['RetroPi']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.6/retropie-v3.6-rpi1_zero.img.gz"
-Images['RetroPi2']="https://github.com/RetroPie/RetroPie-Setup/releases/download/3.6/retropie-v3.6-rpi2_rpi3.img.gz"
-Images['MATE']="https://ubuntu-mate.r.worldssl.net/raspberry-pi/ubuntu-mate-15.10.3-desktop-armhf-raspberry-pi-2.img.xz"
-Images['Weather-Station']="https://downloads.raspberrypi.org/weather_station/images/weather_station-2016-03-24/WeatherStation.zip"
-
-
-declare -A ImagesSHA1
-
-ImagesSHA1['Raspbian-Whezzy']="cb799af077930ff7cbcfaa251b4c6e25b11483de"
-ImagesSHA1['Raspbian-Jessie']="64c7ed611929ea5178fbb69b5a5f29cc9cc7c157"
-ImagesSHA1['Raspbian-Jessie-Lite']="03b6ea33efc3bb4d475f528421d554fc1ef91944"
-ImagesSHA1['Minbian']="43558a173420108408bb8c1c6731ed5812c06971"
-ImagesSHA1['Snappy']="2d32d93e0086593fe34b8c07d4af7227c79addd3"
-ImagesSHA1['OpenELEC']="4dbcabd10d92f046c090f8fb68c0b5edcc78cd60"
-ImagesSHA1['OpenELECPi2']="31082d36c369f49a6223776f776db967b6c48a48"
-ImagesSHA1['LibreELEC']="aab1e74c764bd9321ecba19f27411edd3a0e841b"
-ImagesSHA1['LibreELECPi2']="06f15c73029ee676007234ddf4409a6dec8ae9fb"
-ImagesSHA1['OSMC']="6e22abb05d7713d5b078ddfa3823293ee28d610f"
-ImagesSHA1['OSMCPi2']="e1c40d35e723c9815e4058b44a079921a874e71f"
-ImagesSHA1['Pidora']="00f85ca01a6555d4b0843054090c222239898b7c"
-ImagesSHA1['RISCOS']="9c28ce57a23692cd70e90cfe9fa24e2014501a05"
-#ImagesSHA1['RetroPi']=""
-#ImagesSHA1['RetroPi2']=""
-ImagesSHA1['MATE']="58565911bef09d95734b2e971833452a50f536a4"
-ImagesSHA1['Weather-Station']="9eed5f9f5366faa1f2757c0e7ca81107a81ce249"
-
-# If the list flag has been raised, list the images
-if [ $IMAGE_LIST = true ]; then
-	echo "Images:"
-	for i in "${!Images[@]}"
-	do
-		echo -e "- $COLOUR_PUR$i$COLOUR_RST"
-	done
-	exit
-fi
-
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
 regexSize="Content-Length: ([0-9]+)"
 regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
 regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
+
+while read -r distroName; do
+    distroName="${distroName/images/}"
+    distroName="${distroName///}"
+    distros+=("$distroName")
+done < <(ls -1d images/*/)
+
+echo "Select distro: "
+
+select opt in "${distros[@]}"; do
+    distroSelected="${distros[$REPLY]}"
+
+    if [[ "$distroSelected" = "" ]]; then
+        echo "Invalid selection"
+    else
+        break
+    fi
+done
 
 # Check the script is being run as root
 if [[ $EUID -ne 0 ]]; then
@@ -108,6 +63,8 @@ if [ "$IMAGE_URL" = "" ]; then
 	echo "Could not find an image with the name '$IMAGE_NAME'. Use the --list-images flag for a list.";
 	exit
 fi
+
+echo "DEBUG" && exit  1
 
 #Get the device to write the image to
 DEVICE_PATH="$2"
