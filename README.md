@@ -26,7 +26,7 @@ This tool is completely interactive so just needs executing:
 
 ## Supported Images
 
-The following images can be installed just by using their names:
+The following images are supported:
 
 - Raspbian (Wheezy & Jessie)
 - Minbian
