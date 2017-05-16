@@ -236,7 +236,7 @@ if [ "$IMAGE_ARCHIVE_TYPE" = "NONE" ]; then
 else
 	echo -e "$CLI_PREFIX The image is compressed"
 
-	# Check if the command to extract the image is avaliable
+	# Check if the command to extract the image is available
 	command_exists_exit "$IMAGE_ARCHIVE_TOOL"
 
 	# The image is compressed, write it to the disk as we're decompressing it to save time
