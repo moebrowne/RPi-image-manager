@@ -171,18 +171,15 @@ IMAGE_HASH="$(<"$selectedPath/hash")"
 
 if [ "$IMAGE_HASH" != "" ]; then
 
-	echo -en "$CLI_PREFIX Checking hash..."
-
 	# Hash the downloaded image
-	IMAGE_HASH_ACTUAL=$(sha1sum "$IMAGE_FILE" |  grep -Eo "^([^ ]+)")
+	IMAGE_HASH_ACTUAL=$(pv -paeWcN "Checking Hash (SHA1)" "$IMAGE_FILE" | sha1sum |  grep -Eo "^([^ ]+)")
 
 	# Check the hashes match
 	if [ "$IMAGE_HASH" != "$IMAGE_HASH_ACTUAL" ]; then
-	    echo " FAIL"
 		echo -e "$CLI_PREFIX Hashes mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
 		exit 1
 	else
-		echo " OK"
+		echo -e "$CLI_PREFIX Hash OK"
 	fi
 fi
 
