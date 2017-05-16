@@ -179,7 +179,7 @@ if [ "$IMAGE_HASH" != "" ]; then
 	# Check the hashes match
 	if [ "$IMAGE_HASH" != "$IMAGE_HASH_ACTUAL" ]; then
 	    echo " FAIL"
-		echo  "$CLI_PREFIX Hashes mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
+		echo -e "$CLI_PREFIX Hashes mismatch! [$IMAGE_HASH != $IMAGE_HASH_ACTUAL]"
 		exit 1
 	else
 		echo " OK"
