@@ -15,6 +15,7 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 . "$LIBRARY_PATH_ROOT/generic.sh"
 . "$LIBRARY_PATH_ROOT/colours.sh"
 . "$LIBRARY_PATH_ROOT/download.sh"
+. "$LIBRARY_PATH_ROOT/select.sh"
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
@@ -29,42 +30,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-while read -r distroName; do
-    distroName="${distroName/images/}"
-    distroName="${distroName///}"
-    distros+=("$distroName")
-done < <(ls -1d images/*/)
+selectDistro
 
-echo "Select distro: "
-
-select opt in "${distros[@]}"; do
-    distroSelected="${distros[$(($REPLY-1))]}"
-
-    if [[ "$distroSelected" = "" ]]; then
-        echo "Invalid selection"
-    else
-        break
-    fi
-done
-
-echo "Select $distroSelected version:"
-
-while read -r distroVersionName; do
-    distroVersionName="${distroVersionName/images\/$distroSelected/}"
-    distroVersionName="${distroVersionName///}"
-    distroVersions+=("$distroVersionName")
-done < <(ls -1d images/"$distroSelected"/*/)
-
-select opt in "${distroVersions[@]}"; do
-    distroVersionSelected="${distroVersions[$(($REPLY-1))]}"
-
-    if [[ "$distroVersionSelected" = "" ]]; then
-        echo "Invalid selection"
-    else
-        selectedPath="images/$distroSelected/$distroVersionSelected/"
-        break
-    fi
-done
+selectDistroVersion
 
 # Get the device to write the image to
 echo "Where do you want to write the image?"
