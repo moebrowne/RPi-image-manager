@@ -80,7 +80,8 @@ if [[ "$distroSelected" == "Local File" ]]; then
         break
     done
 else
-    imageMetaPath="$(selectDistroVersion "$distroSelected")"
+    distroVersionSelected="$(selectDistroVersion "$distroSelected")"
+    imageMetaPath="images/$distroSelected/$distroVersionSelected"
     imageFilePath="$imageMetaPath/cache/image"
 
     # Download the image

@@ -35,7 +35,6 @@ function selectDistroVersion() {
     local distroVersions # The array of versions available for this distro
     local distroVersion
     local distroVersionSelected
-    local selectedPath
 
     echo "Select $distroName version:" >&2
 
@@ -51,10 +50,9 @@ function selectDistroVersion() {
         if [[ "$distroVersionSelected" = "" ]]; then
             echo "Invalid selection" >&2
         else
-            selectedPath="images/$distroName/$distroVersionSelected"
             break
         fi
     done
 
-    echo "$selectedPath"
+    echo "$distroVersionSelected"
 }
