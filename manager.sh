@@ -38,17 +38,19 @@ if [[ "$distroSelected" == "Local File" ]]; then
     # Get the local path to the image file
     echo "Where is the image file located?"
 
-    while read -ep "Path: " selectedPath; do
+    while read -ep "Path: " imageFilePath; do
 
         # Check a file was specified
-        if [ ! -f "$selectedPath" ]; then
+        if [ ! -f "$imageFilePath" ]; then
             echo "Selected path doesn't appear to be a file";
             continue
         fi
         break
     done
 else
-    selectedPath=$(selectDistroVersion "$distroSelected")
+    imageMetaPath="$(selectDistroVersion "$distroSelected")"
+    imageFilePath="$imageMetaPath/cache/image"
+    imageDownloaded="false"
 fi
 
 # Get the device to write the image to
@@ -85,16 +87,23 @@ fi
 
 CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
 
-# Get the path to download the image
-IMAGE_DOWNLOAD_URL=$(<"$selectedPath/URL")
+if [[ "$imageDownloaded" == "false" ]]; then
+    download $(<"$imageMetaPath/URL") "$imageFilePath"
 
-# Check we could find the requested image
-if [ "$IMAGE_DOWNLOAD_URL" = "" ]; then
-	echo "ERROR: Image download path empty?!";
-	exit
+    if [[ $? == 1 ]]; then
+        echo "Download failed"
+        exit 1
+    fi
+
+    checkImageHash "$imageFilePath" $(<"$imageMetaPath/hash")
+
+    if [[ $? == 1 ]]; then
+        echo "Hash Mismatch"
+        exit 1
+    fi
+
 fi
 
-download "$IMAGE_DOWNLOAD_URL"
 
 #Get the images file type data
 IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
