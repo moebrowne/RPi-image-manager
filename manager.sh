@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "-----------------------------------------"
-echo " Raspberry Pi Image Manager (RIM) v0.3.4 "
-echo "-----------------------------------------"
-
 # Get the source directory
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
