@@ -47,7 +47,7 @@ if [[ "$distroSelected" == "Local Image File" ]]; then
         break
     done
 else
-    selectDistroVersion
+    selectedPath=$(selectDistroVersion "$distroSelected")
 fi
 
 # Get the device to write the image to

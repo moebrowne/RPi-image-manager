@@ -30,7 +30,12 @@ function selectDistro() {
 }
 
 function selectDistroVersion() {
-    echo "Select $distroSelected version:"
+
+    local distroSelected="$1"
+    local distroVersionName
+    local distroVersions
+
+    echo "Select $distroSelected version:" >&2
 
     while read -r distroVersionName; do
         distroVersionName="${distroVersionName/images\/$distroSelected/}"
@@ -42,10 +47,12 @@ function selectDistroVersion() {
         distroVersionSelected="${distroVersions[$(($REPLY-1))]}"
 
         if [[ "$distroVersionSelected" = "" ]]; then
-            echo "Invalid selection"
+            echo "Invalid selection" >&2
         else
             selectedPath="images/$distroSelected/$distroVersionSelected/"
             break
         fi
     done
+
+    echo "$selectedPath"
 }
