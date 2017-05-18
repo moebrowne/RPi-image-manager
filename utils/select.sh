@@ -1,8 +1,8 @@
 
 function selectDistro() {
 
-    local distros
-    local distroSelected
+    local distros # The array of distro names
+    local distroSelected # The name of the distro the user selects
     local distroName
 
     # Add a custom 'distro'
@@ -31,17 +31,19 @@ function selectDistro() {
 
 function selectDistroVersion() {
 
-    local distroSelected="$1"
-    local distroVersionName
-    local distroVersions
+    local distroName="$1" # Which distro to get the versions for
+    local distroVersions # The array of versions available for this distro
+    local distroVersion
+    local distroVersionSelected
+    local selectedPath
 
-    echo "Select $distroSelected version:" >&2
+    echo "Select $distroName version:" >&2
 
-    while read -r distroVersionName; do
-        distroVersionName="${distroVersionName/images\/$distroSelected/}"
-        distroVersionName="${distroVersionName///}"
-        distroVersions+=("$distroVersionName")
-    done < <(ls -1d images/"$distroSelected"/*/)
+    while read -r distroVersion; do
+        distroVersion="${distroVersion/images\/$distroName/}"
+        distroVersion="${distroVersion///}"
+        distroVersions+=("$distroVersion")
+    done < <(ls -1d images/"$distroName"/*/)
 
     select opt in "${distroVersions[@]}"; do
         distroVersionSelected="${distroVersions[$(($REPLY-1))]}"
@@ -49,7 +51,7 @@ function selectDistroVersion() {
         if [[ "$distroVersionSelected" = "" ]]; then
             echo "Invalid selection" >&2
         else
-            selectedPath="images/$distroSelected/$distroVersionSelected"
+            selectedPath="images/$distroName/$distroVersionSelected"
             break
         fi
     done
