@@ -49,7 +49,7 @@ function selectDistroVersion() {
         if [[ "$distroVersionSelected" = "" ]]; then
             echo "Invalid selection" >&2
         else
-            selectedPath="images/$distroSelected/$distroVersionSelected/"
+            selectedPath="images/$distroSelected/$distroVersionSelected"
             break
         fi
     done
