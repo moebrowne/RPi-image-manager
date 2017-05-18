@@ -82,12 +82,8 @@ if [[ "$distroSelected" == "Local File" ]]; then
 else
     imageMetaPath="$(selectDistroVersion "$distroSelected")"
     imageFilePath="$imageMetaPath/cache/image"
-    imageDownloaded="false"
-fi
 
-CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
-
-if [[ "$imageDownloaded" == "false" ]]; then
+    # Download the image
     download $(<"$imageMetaPath/URL") "$imageFilePath"
 
     if [[ $? == 1 ]]; then
@@ -103,6 +99,8 @@ if [[ "$imageDownloaded" == "false" ]]; then
     fi
 
 fi
+
+CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
 
 
 #Get the images file type data
