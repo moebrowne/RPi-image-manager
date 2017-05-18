@@ -24,11 +24,12 @@ This tool is completely interactive so just needs executing:
 ./manager.sh
 ```
 
-## Supported Images
+## Images
 
-The following images are supported:
+You can either write a file from your local disk or download one of the inbuilt ones:
 
-- Raspbian (Wheezy & Jessie)
+- Raspbian Jessie
+- Raspbian Jessie Lite
 - Minbian
 - Ubuntu Snappy
 - OpenELEC
