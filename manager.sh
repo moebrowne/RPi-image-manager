@@ -16,6 +16,7 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 . "$LIBRARY_PATH_ROOT/colours.sh"
 . "$LIBRARY_PATH_ROOT/download.sh"
 . "$LIBRARY_PATH_ROOT/select.sh"
+. "$LIBRARY_PATH_ROOT/hashCheck.sh"
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
