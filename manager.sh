@@ -31,28 +31,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-distroSelected=$(selectDistro)
-
-if [[ "$distroSelected" == "Local File" ]]; then
-
-    # Get the local path to the image file
-    echo "Where is the image file located?"
-
-    while read -ep "Path: " imageFilePath; do
-
-        # Check a file was specified
-        if [ ! -f "$imageFilePath" ]; then
-            echo "Selected path doesn't appear to be a file";
-            continue
-        fi
-        break
-    done
-else
-    imageMetaPath="$(selectDistroVersion "$distroSelected")"
-    imageFilePath="$imageMetaPath/cache/image"
-    imageDownloaded="false"
-fi
-
 # Get the device to write the image to
 echo "Where do you want to write the image?"
 
@@ -83,6 +61,28 @@ fi
 if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
 	echo "$DEVICE_PATH: Still mounted"
 	exit
+fi
+
+distroSelected=$(selectDistro)
+
+if [[ "$distroSelected" == "Local File" ]]; then
+
+    # Get the local path to the image file
+    echo "Where is the image file located?"
+
+    while read -ep "Path: " imageFilePath; do
+
+        # Check a file was specified
+        if [ ! -f "$imageFilePath" ]; then
+            echo "Selected path doesn't appear to be a file";
+            continue
+        fi
+        break
+    done
+else
+    imageMetaPath="$(selectDistroVersion "$distroSelected")"
+    imageFilePath="$imageMetaPath/cache/image"
+    imageDownloaded="false"
 fi
 
 CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
