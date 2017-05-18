@@ -32,7 +32,7 @@ fi
 
 distroSelected=$(selectDistro)
 
-if [[ "$distroSelected" == "Local Image File" ]]; then
+if [[ "$distroSelected" == "Local File" ]]; then
 
     # Get the local path to the image file
     echo "Where is the image file located?"

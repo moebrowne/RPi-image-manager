@@ -6,7 +6,7 @@ function selectDistro() {
     local distroName
 
     # Add a custom 'distro'
-    distros+=("Local Image File")
+    distros+=("Local File")
 
     while read -r distroName; do
         distroName="${distroName/images/}"
