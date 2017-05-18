@@ -19,10 +19,6 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 . "$LIBRARY_PATH_ROOT/hashCheck.sh"
 
 #Regex
-regexETag="ETag: \"([a-z0-9\-]+)\""
-regexSize="Content-Length: ([0-9]+)"
-regexLastMod="Last-Modified: ([a-zA-Z0-9\/ :,-]+)"
-regexFileName="Content-Disposition: attachment; filename=([a-zA-Z0-9\.-]+)"
 regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
 
 # Check the script is being run as root
