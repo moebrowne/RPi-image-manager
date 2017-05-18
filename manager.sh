@@ -32,7 +32,23 @@ fi
 
 selectDistro
 
-selectDistroVersion
+if [[ "$distroSelected" == "Local Image File" ]]; then
+
+    # Get the local path to the image file
+    echo "Where is the image file located?"
+
+    while read -ep "Path: " selectedPath; do
+
+        # Check a file was specified
+        if [ ! -f "$selectedPath" ]; then
+            echo "Selected path doesn't appear to be a file";
+            continue
+        fi
+        break
+    done
+else
+    selectDistroVersion
+fi
 
 # Get the device to write the image to
 echo "Where do you want to write the image?"
