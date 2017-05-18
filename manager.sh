@@ -16,6 +16,7 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 . "$LIBRARY_PATH_ROOT/colours.sh"
 . "$LIBRARY_PATH_ROOT/download.sh"
 . "$LIBRARY_PATH_ROOT/select.sh"
+. "$LIBRARY_PATH_ROOT/hashCheck.sh"
 
 #Regex
 regexETag="ETag: \"([a-z0-9\-]+)\""
@@ -28,26 +29,6 @@ regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
-fi
-
-distroSelected=$(selectDistro)
-
-if [[ "$distroSelected" == "Local File" ]]; then
-
-    # Get the local path to the image file
-    echo "Where is the image file located?"
-
-    while read -ep "Path: " selectedPath; do
-
-        # Check a file was specified
-        if [ ! -f "$selectedPath" ]; then
-            echo "Selected path doesn't appear to be a file";
-            continue
-        fi
-        break
-    done
-else
-    selectedPath=$(selectDistroVersion "$distroSelected")
 fi
 
 # Get the device to write the image to
@@ -82,18 +63,46 @@ if [ `mount | grep -c "$DEVICE_PATH"` -gt 0 ]; then
 	exit
 fi
 
-CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
+distroSelected=$(selectDistro)
 
-# Get the path to download the image
-IMAGE_DOWNLOAD_URL=$(<"$selectedPath/URL")
+if [[ "$distroSelected" == "Local File" ]]; then
 
-# Check we could find the requested image
-if [ "$IMAGE_DOWNLOAD_URL" = "" ]; then
-	echo "ERROR: Image download path empty?!";
-	exit
+    # Get the local path to the image file
+    echo "Where is the image file located?"
+
+    while read -ep "Path: " imageFilePath; do
+
+        # Check a file was specified
+        if [ ! -f "$imageFilePath" ]; then
+            echo "Selected path doesn't appear to be a file";
+            continue
+        fi
+        break
+    done
+else
+    distroVersionSelected="$(selectDistroVersion "$distroSelected")"
+    imageMetaPath="images/$distroSelected/$distroVersionSelected"
+    imageFilePath="$imageMetaPath/cache/image"
+
+    # Download the image
+    download $(<"$imageMetaPath/URL") "$imageFilePath"
+
+    if [[ $? == 1 ]]; then
+        echo "Download failed"
+        exit 1
+    fi
+
+    checkImageHash "$imageFilePath" $(<"$imageMetaPath/hash")
+
+    if [[ $? == 1 ]]; then
+        echo "Hash Mismatch"
+        exit 1
+    fi
+
 fi
 
-download "$IMAGE_DOWNLOAD_URL"
+CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
+
 
 #Get the images file type data
 IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
