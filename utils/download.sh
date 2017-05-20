@@ -3,7 +3,7 @@ function download() {
     local imageDownloadURL="$1"
     local imageSavePath="$2"
 
-    echo -en "$CLI_PREFIX Fetching meta data..."
+    echo -n "Fetching meta data..."
 
     #Get the actual download URL of the image
     imageDownloadURL=`curl -sIL "$imageDownloadURL" -o /dev/null -w %{url_effective}`
@@ -18,7 +18,7 @@ function download() {
 
     if [ "$IMAGE_RESPONSE_CODE" != 200 ]; then
         echo " FAIL"
-        echo -e "$CLI_PREFIX Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
+        echo "Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
         exit
     else
         echo " OK"

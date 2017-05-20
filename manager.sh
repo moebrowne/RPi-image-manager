@@ -93,9 +93,6 @@ else
 
 fi
 
-CLI_PREFIX="$COLOUR_PUR$distroSelected ($distroVersionSelected):$COLOUR_RST"
-
-
 #Get the images file type data
 IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
 
@@ -138,7 +135,7 @@ fi
 
 # Check if were able to determine what type of file the image is
 if [[ "$IMAGE_ARCHIVE_TYPE" = "" ]]; then
-	echo -e "$CLI_PREFIX Couldn't determine the file type of the image: '$IMAGE_TYPE_DATA'"
+	echo "Couldn't determine the file type of the image: '$IMAGE_TYPE_DATA'"
 	exit
 fi
 
@@ -147,7 +144,7 @@ if [ "$IMAGE_ARCHIVE_TYPE" = "NONE" ]; then
 	# No compression, write straight to disk
 	pv -pabeWcN "Writing" "$IMAGE_FILE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 else
-	echo -e "$CLI_PREFIX The image is compressed"
+	echo "The image is compressed"
 
 	# Check if the command to extract the image is available
 	command_exists_exit "$IMAGE_ARCHIVE_TOOL"
@@ -160,4 +157,4 @@ fi
 sync
 
 # Give a complete notice
-echo -e "$CLI_PREFIX Image write complete!"
+echo "Image write complete!"
