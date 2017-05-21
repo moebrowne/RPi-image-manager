@@ -76,8 +76,11 @@ else
     imageMetaPath="images/$distroSelected/$distroVersionSelected"
     imageFilePath="$imageMetaPath/cache/image"
 
-    # Download the image
-    download $(<"$imageMetaPath/URL") "$imageFilePath"
+    # Check if the image we want is already cached
+    if [ ! -f "$imageFilePath" ]; then
+        # Download the image
+        download $(<"$imageMetaPath/URL") "$imageFilePath"
+    fi
 
     if [[ $? == 1 ]]; then
         echo "Download failed"

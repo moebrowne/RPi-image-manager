@@ -28,18 +28,15 @@ function download() {
     [[ $IMAGE_HEADERS =~ $regexSize ]]
     IMAGE_SIZE="${BASH_REMATCH[1]}"
 
-    #Check if we already have this version
-    if [ ! -f "$imageSavePath" ]; then
-        #Download the image
-        curl -sL "$imageDownloadURL" | pv -s "$IMAGE_SIZE" -cN "Download" > "$imageSavePath"
-        return 0
-    else
-        return 2
-    fi
+    #Download the image
+    curl -sL "$imageDownloadURL" | pv -s "$IMAGE_SIZE" -cN "Download" > "$imageSavePath"
 
     # Check the file was created
     if [ ! -f "$imageSavePath" ]; then
         return 1
     fi
+
+    # All okay!
+    return 0
 
 }
