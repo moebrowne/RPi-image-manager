@@ -5,50 +5,50 @@ It has the added benefit as it also gives users a verbose output showing for exa
 
 ## Install
 
-Instillation is easy:
+Installation is easy:
 
-    # Clone this repo
-    git clone https://github.com/moebrowne/RPi-Image-Manager
-    
-    # Change directory
-    cd RPi-Image-Manager
-    
-    # Set the image manager as executable
-    chmod u+x manager.sh
+```bash
+# Clone this repo
+git clone https://github.com/moebrowne/RPi-Image-Manager
+
+# Change directory
+cd RPi-Image-Manager
+```
 
 ## Usage
 
-This tool takes 2 parameters like so:
+This tool is completely interactive so just needs executing:
 
-    # Execute!
-    ./manager.sh {IMAGE_NAME} {DEVICE_PATH}
+```bash
+# Execute!
+./manager.sh
+```
 
-Where `{IMAGE_NAME}` is one of the images listed below and `{DEVICE_PATH}` is the path to the block device you wish to write the image to
+## Images
 
-## Parameters
+You can either write a file from your local disk or download one of the inbuilt ones:
 
-There is a single parameter the tool can take:
-
-    -l or --list-images		List out all the images
-
-## Supported Images
-
-The following images can be installed just by using their names:
-
-- Raspbian
+- Raspbian Jessie
+- Raspbian Jessie Lite
+- Minbian
 - Ubuntu Snappy
-- OPENELEC
+- OpenELEC
+- LibreELEC
 - OSMC
 - Pidora
 - RISC OS
-- Retro Pi (For RPi 1 & 2)
+- MATE
+- Weather Station
+- RetroPie
 
 ## Dependencies
 
 There is only a single package required which is non-standard; pv. It's easily installed whatever Distro you're using:
 
-    # Ubuntu / Debian
-    apt-get install pv
-    
-    # RHEL / CentOS
-    yum install pv
+```
+# Ubuntu / Debian
+apt-get install pv
+
+# RHEL / CentOS
+yum install pv
+```
