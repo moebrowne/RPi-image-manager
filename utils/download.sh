@@ -28,8 +28,13 @@ function download() {
     [[ $IMAGE_HEADERS =~ $regexSize ]]
     IMAGE_SIZE="${BASH_REMATCH[1]}"
 
-    #Download the image
-    curl -sL "$imageDownloadURL" | pv -s "$IMAGE_SIZE" -cN "Download" > "$imageSavePath"
+    # Download the image
+    if [[ "$IMAGE_SIZE" ! -gt 0 ]]; then
+        echo "Unable to determine image size"
+        curl -sL "$imageDownloadURL" | pv -cN "Download" > "$imageSavePath"
+    else
+        curl -sL "$imageDownloadURL" | pv -s "$IMAGE_SIZE" -cN "Download" > "$imageSavePath"
+    fi
 
     # Check the file was created
     if [ ! -f "$imageSavePath" ]; then
