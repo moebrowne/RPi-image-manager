@@ -109,7 +109,7 @@ else
 fi
 
 #Get the images file type data
-IMAGE_TYPE_DATA=`file "$IMAGE_FILE"`
+IMAGE_TYPE_DATA=`file "$imageFilePath"`
 
 if [[ $IMAGE_TYPE_DATA =~ "Zip archive data" ]]; then
 
@@ -121,7 +121,7 @@ if [[ $IMAGE_TYPE_DATA =~ "Zip archive data" ]]; then
 
 	#Determine the decompressed size of the archive
 	REGEX="([0-9]+)[ ]+"
-	[[ `unzip -l "$IMAGE_FILE"` =~ $REGEX ]]
+	[[ `unzip -l "$imageFilePath"` =~ $REGEX ]]
 	IMAGE_ARCHIVE_SIZE="${BASH_REMATCH[1]}"
 fi
 
@@ -135,7 +135,7 @@ if [[ $IMAGE_TYPE_DATA =~ "gzip compressed data" ]]; then
 
 	#Determine the decompressed size of the archive
 	REGEX="[ ]+[0-9]+[ ]+([0-9]+)"
-	[[ `zcat -l "$IMAGE_FILE"` =~ $REGEX ]]
+	[[ `zcat -l "$imageFilePath"` =~ $REGEX ]]
 	IMAGE_ARCHIVE_SIZE="${BASH_REMATCH[1]}"
 fi
 
@@ -157,7 +157,7 @@ fi
 # Check if the image is compressed
 if [ "$IMAGE_ARCHIVE_TYPE" = "NONE" ]; then
 	# No compression, write straight to disk
-	pv -pabeWcN "Writing" "$IMAGE_FILE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
+	pv -pabeWcN "Writing" "$imageFilePath" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 else
 	echo "The image is compressed"
 
@@ -165,7 +165,7 @@ else
 	command_exists_exit "$IMAGE_ARCHIVE_TOOL"
 
 	# The image is compressed, write it to the disk as we're decompressing it to save time
-	pv -pabeWcN "Extracting $IMAGE_ARCHIVE_TYPE" "$IMAGE_FILE" | $IMAGE_ARCHIVE_TOOL | pv -pabeWcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
+	pv -pabeWcN "Extracting $IMAGE_ARCHIVE_TYPE" "$imageFilePath" | $IMAGE_ARCHIVE_TOOL | pv -pabeWcN "Writing" -s "$IMAGE_ARCHIVE_SIZE" | dd bs=4M of="$DEVICE_PATH" conv=fdatasync
 fi
 
 # Persist any buffers
