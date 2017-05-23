@@ -96,13 +96,16 @@ else
         exit 1
     fi
 
-    checkImageHash "$imageFilePath" $(<"$imageMetaPath/hash")
+    if [[ -f "$imageMetaPath/hash" ]]; then
+        checkImageHash "$imageFilePath" $(<"$imageMetaPath/hash")
 
-    if [[ $? == 1 ]]; then
-        echo "Hash Mismatch"
-        exit 1
+        if [[ $? == 1 ]]; then
+            echo "Hash Mismatch"
+            exit 1
+        fi
+    else
+        echo "Not checking image hash"
     fi
-
 fi
 
 #Get the images file type data
