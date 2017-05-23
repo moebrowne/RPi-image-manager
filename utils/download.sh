@@ -29,7 +29,7 @@ function download() {
     IMAGE_SIZE="${BASH_REMATCH[1]}"
 
     # Download the image
-    if [[ "$IMAGE_SIZE" ! -gt 0 ]]; then
+    if [[ ! "$IMAGE_SIZE" -gt 0 ]]; then
         echo "Unable to determine image size"
         curl -s "$imageDownloadURL" | pv -cN "Download" > "$imageSavePath"
     else
