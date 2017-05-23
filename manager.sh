@@ -87,6 +87,8 @@ else
     if [ ! -f "$imageFilePath" ]; then
         # Download the image
         download $(<"$imageMetaPath/URL") "$imageFilePath"
+    else
+        echo "Using image from cache"
     fi
 
     if [[ $? == 1 ]]; then
