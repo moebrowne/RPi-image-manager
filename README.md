@@ -39,6 +39,7 @@ You can either write a file from your local disk or download one of the inbuilt 
 - RISC OS
 - MATE
 - Weather Station
+- RetroPie
 
 ## Dependencies
 
