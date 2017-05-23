@@ -16,6 +16,7 @@ LIBRARY_PATH_ROOT="$DIR/utils"
 
 #Regex
 regexHTTPCode="HTTP/[0-9].[0-9] ([0-9]+) ([a-zA-Z0-9\. -]+)"
+regexSize="Content-Range: bytes [0-9]+-[0-9]+/([0-9]+)"
 
 # Check the script is being run as root
 if [[ $EUID -ne 0 ]]; then
