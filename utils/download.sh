@@ -31,9 +31,9 @@ function download() {
     # Download the image
     if [[ "$IMAGE_SIZE" ! -gt 0 ]]; then
         echo "Unable to determine image size"
-        curl -sL "$imageDownloadURL" | pv -cN "Download" > "$imageSavePath"
+        curl -s "$imageDownloadURL" | pv -cN "Download" > "$imageSavePath"
     else
-        curl -sL "$imageDownloadURL" | pv -s "$IMAGE_SIZE" -cN "Download" > "$imageSavePath"
+        curl -s "$imageDownloadURL" | pv -s "$IMAGE_SIZE" -cN "Download" > "$imageSavePath"
     fi
 
     # Check the file was created
