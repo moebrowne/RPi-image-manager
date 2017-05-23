@@ -16,7 +16,7 @@ function download() {
     IMAGE_RESPONSE_CODE="${BASH_REMATCH[1]}"
     IMAGE_RESPONSE_MSG="${BASH_REMATCH[2]}"
 
-    if [ "$IMAGE_RESPONSE_CODE" != 200 ]; then
+    if [ "$IMAGE_RESPONSE_CODE" -gt 300 ]; then
         echo " FAIL"
         echo "Download Error [HTTP $IMAGE_RESPONSE_CODE $IMAGE_RESPONSE_MSG]"
         exit
