@@ -6,10 +6,10 @@ function download() {
     echo -n "Fetching meta data..."
 
     #Get the actual download URL of the image
-    imageDownloadURL=`curl -sIL "$imageDownloadURL" -o /dev/null -w %{url_effective}`
+    imageDownloadURL=`curl -sLr 0-0 "$imageDownloadURL" -o /dev/null -w %{url_effective}`
 
     #Get the HTTP headers for the image
-    IMAGE_HEADERS=`curl -sI "$imageDownloadURL"`
+    IMAGE_HEADERS=`curl -sir 0-0 "$imageDownloadURL"`
 
     #Get the HTTP response code
     [[ $IMAGE_HEADERS =~ $regexHTTPCode ]]
