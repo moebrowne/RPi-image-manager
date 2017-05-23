@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Get the source directory
 DIR="${BASH_SOURCE%/*}"
