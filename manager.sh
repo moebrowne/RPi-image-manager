@@ -75,7 +75,13 @@ if [[ "$distroSelected" == "Local File" ]]; then
 else
     distroVersionSelected="$(selectDistroVersion "$distroSelected")"
     imageMetaPath="images/$distroSelected/$distroVersionSelected"
-    imageFilePath="$imageMetaPath/cache/image"
+    imageCacheDir="$imageMetaPath/cache"
+    imageFilePath="$imageCacheDir/image"
+
+    # Check the cache directory exists
+    if [[ ! -d "$imageCacheDir" ]]; then
+        mkdir "$imageCacheDir"
+    fi
 
     # Check if the image we want is already cached
     if [ ! -f "$imageFilePath" ]; then
