@@ -30,6 +30,8 @@ You can either write a file from your local disk or download one of the inbuilt 
 
 - Raspbian Jessie
 - Raspbian Jessie Lite
+- Raspbian Stretch
+- Raspbian Stretch Lite
 - Minbian
 - Ubuntu Snappy
 - OpenELEC
