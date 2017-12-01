@@ -42,6 +42,7 @@ You can either write a file from your local disk or download one of the inbuilt 
 - MATE
 - Weather Station
 - RetroPie
+- Pirate Box
 
 ## Dependencies
 
